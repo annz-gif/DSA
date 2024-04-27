@@ -1,0 +1,27 @@
+class Solution {
+public:
+    void preorder(TreeNode* p, TreeNode* q ,bool &flag){
+    if(!p && !q)return;
+    else if(!p&&q || !q&&p){
+       flag=false;
+        return; 
+    }
+
+    if(p->val!=q->val){
+        flag=false;
+        return;
+    }
+    preorder(p->left,q->left,flag);
+    preorder(p->right,q->right,flag);
+
+}
+    bool isSameTree(TreeNode* p, TreeNode* q) {
+        bool flag=true;
+        preorder(p,q,flag);
+        if(flag)return true;
+        return false;
+
+
+
+    }
+};
