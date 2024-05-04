@@ -1,0 +1,41 @@
+class Solution {
+public:
+    int numRescueBoats(vector<int>& people, int limit) {
+        unsigned freq[30001]={0};
+        int maxW=0, minW=30001;
+        for(int x: people){
+            freq[x]++;
+            maxW=max(maxW, x);
+            minW=min(minW, x);
+        }
+
+        int x=0, f1, l, r;
+        for(l=minW, r=maxW; l<r; ){
+            while(l<r && freq[r]==0) r--;
+            int f0=freq[r];
+            while(l<r && freq[l]==0) l++;
+            f1=freq[l];
+        //    cout<<r<<", freq[r]="<<freq[r]<<", l="<<l<<", freq[l]="<<freq[l]<<endl;
+            if (r==l) break;
+            int boat=min(f0, f1);
+            x+=boat;
+            freq[r]-=boat;
+            if(l+r<=limit){
+                freq[l]-=boat;
+                if (f1<=f0) l++;
+            } 
+        }
+    //    cout<<r<<","<<freq[r]<<endl;
+        x+=(r*2>limit)?freq[r]:(freq[r]+1)/2;
+        return x;
+    }
+};
+
+
+
+auto init = []() {
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    return 'c';
+}();
