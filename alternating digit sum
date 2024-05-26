@@ -1,0 +1,29 @@
+class Solution {
+public:
+    int alternateDigitSum(int n) {
+        int size = 0;
+        int sumOdd = 0;
+        int sumEven = 0;
+        bool flag = true;
+
+        while (n > 0) {
+            int rem = n % 10;
+            if (flag) {
+                sumOdd += rem;
+                sumEven -= rem;
+            } else {
+                sumOdd -= rem;
+                sumEven += rem;
+            }
+
+            flag = !flag;
+            size++;
+            n /= 10;
+        }
+
+        if (size % 2 == 1)
+            return sumOdd;
+
+        return sumEven;
+    }
+};
