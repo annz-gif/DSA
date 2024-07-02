@@ -1,0 +1,26 @@
+//User function template for C++
+class Solution{
+public:
+
+
+	vector<int> valueEqualToIndex(int arr[], int n) {
+	    vector<int> ans;
+        int s=0;
+        int e=1;
+        while(s<n&&e<=n){
+            if(arr[s]==e){
+                ans.push_back(arr[s]);
+                s++;
+                e++;
+                
+            }
+            else{
+                s++;
+                e++;
+            }
+            
+        }
+
+        return ans;
+    }
+};
