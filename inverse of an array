@@ -1,0 +1,39 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+// Function to inverse the array
+vector<int> inverse(const vector<int>& arr) {
+    int n = arr.size();
+    vector<int> narr(n);
+
+    // For each index i in the original array
+    for (int i = 0; i < n; i++) {
+        // The value arr[i] indicates the index in the inverted array
+        narr[arr[i]] = i;
+    }
+
+    return narr;
+}
+
+int main() {
+    int N;
+    cin >> N;  // The size of the array
+    vector<int> arr(N);
+
+    // Input the array elements
+    for (int i = 0; i < N; ++i) {
+        cin >> arr[i];
+    }
+
+    // Get the inverse array
+    vector<int> result = inverse(arr);
+
+    // Output the inverted array
+    for (int i = 0; i < N; ++i) {
+        cout << result[i] << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
