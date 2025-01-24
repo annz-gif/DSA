@@ -1,0 +1,33 @@
+#include <iostream>
+#include <vector>
+#include <numeric>  // For std::gcd
+using namespace std;
+
+int find_pairs(const vector<int>& integer_array) {
+    int count = 0;
+    int size_of_array = integer_array.size();
+    
+    // Loop through all pairs (i, j) where 1 <= i <= j <= N
+    for (int i = 0; i < size_of_array; ++i) {
+        for (int j = i; j < size_of_array; ++j) {
+            // Check if GCD of integer_array[i] and integer_array[j] is 1
+            if (std::gcd(integer_array[i], integer_array[j]) == 1) {
+                count++;
+            }
+        }
+    }
+    
+    return count;
+}
+
+int main() {
+    // Example 1
+    vector<int> integer_array1 = {1, 2, 4, 6};
+    cout << find_pairs(integer_array1) << endl;  // Output: 3
+    
+    // Example 2
+    vector<int> integer_array2 = {3, 6, 9, 12};
+    cout << find_pairs(integer_array2) << endl;  // Output: 0
+    
+    return 0;
+}
