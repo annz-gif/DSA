@@ -1,0 +1,42 @@
+class Solution {
+public:
+    vector<bool> checkIfPrerequisite(int n, vector<vector<int>>& prerequisites, vector<vector<int>>& queries) {
+        vector<bitset<100>> prereq(n);  // Tracks all prerequisites for each course
+        vector<vector<int>> adj(n);     // Directed edges: adj[a] = courses that require 'a'
+        vector<int> inDegree(n, 0);     // Number of prerequisites for each course
+
+        // Step 1: Build the graph and initialize direct prerequisites
+        for (auto& edge : prerequisites) {
+            int a = edge[0], b = edge[1];
+            adj[a].push_back(b);        // 'a' is a prerequisite for 'b'
+            prereq[b].set(a);           // Mark 'a' in 'b's bitset
+            inDegree[b]++;              // 'b' has one more prerequisite
+        }
+
+        // Step 2: Topological sort using Kahn's algorithm
+        queue<int> q;
+        for (int i = 0; i < n; ++i) {
+            if (inDegree[i] == 0) q.push(i);  // Start with courses having no prerequisites
+        }
+
+        while (!q.empty()) {
+            int u = q.front();
+            q.pop();
+            for (int v : adj[u]) {      // For all courses that require 'u'
+                prereq[v] |= prereq[u]; // Merge 'u's prerequisites into 'v's
+                if (--inDegree[v] == 0) // Decrement 'v's prerequisites count
+                    q.push(v);          // If all prerequisites are processed, add to queue
+            }
+        }
+
+        // Step 3: Answer queries using the precomputed bitsets
+        vector<bool> ans;
+        ans.reserve(queries.size());
+        for (auto& qry : queries) {
+            int u = qry[0], v = qry[1];
+            ans.push_back(prereq[v][u]); // Check if 'u' is in 'v's prerequisites
+        }
+
+        return ans;
+    }
+};
