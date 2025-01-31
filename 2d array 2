@@ -1,0 +1,48 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+void wavePrintColumnWise(vector<vector<int>>& matrix, int M, int N) {
+    vector<int> result;
+    
+    // Traverse each column
+    for (int j = 0; j < N; j++) {
+        if (j % 2 == 0) {
+            // For even-indexed columns, print top to bottom
+            for (int i = 0; i < M; i++) {
+                result.push_back(matrix[i][j]);
+            }
+        } else {
+            // For odd-indexed columns, print bottom to top
+            for (int i = M - 1; i >= 0; i--) {
+                result.push_back(matrix[i][j]);
+            }
+        }
+    }
+    
+    // Print the result array with commas and 'END' at the end
+    for (int i = 0; i < result.size(); i++) {
+        if (i != 0) cout << ", ";
+        cout << result[i];
+    }
+    cout << ", END" << endl;
+}
+
+int main() {
+    int M, N;
+    cin >> M >> N;  // Read number of rows (M) and columns (N)
+
+    vector<vector<int>> matrix(M, vector<int>(N));
+
+    // Reading the matrix values
+    for (int i = 0; i < M; i++) {
+        for (int j = 0; j < N; j++) {
+            cin >> matrix[i][j];
+        }
+    }
+
+    // Call the wavePrint function to print the wave pattern column-wise
+    wavePrintColumnWise(matrix, M, N);
+    
+    return 0;
+}
