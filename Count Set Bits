@@ -1,0 +1,26 @@
+#include <iostream>
+using namespace std;
+
+int countSetBits(int n) {
+    int count = 0;
+    while (n > 0) {
+        count += (n & 1);  // Add 1 if the least significant bit is 1
+        n >>= 1;            // Right shift the number to check the next bit
+    }
+    return count;
+}
+
+int main() {
+    int N;  // Number of test cases
+    cin >> N;  // Read number of test cases
+    
+    while (N--) {
+        int num;
+        cin >> num;  // Read the number
+        
+        // Output the number of set bits in the binary representation of num
+        cout << countSetBits(num) << endl;
+    }
+    
+    return 0;
+}
