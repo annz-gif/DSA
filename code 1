@@ -1,0 +1,35 @@
+#include <iostream>
+#include <unordered_map>
+using namespace std;
+
+char maxFrequencyCharacter(const string& s) {
+    unordered_map<char, int> freqMap;
+
+    // Count the frequency of each character
+    for (char c : s) {
+        freqMap[c]++;
+    }
+
+    // Find the character with the maximum frequency
+    char maxChar = s[0];
+    int maxCount = freqMap[maxChar];
+
+    for (const auto& entry : freqMap) {
+        if (entry.second > maxCount) {
+            maxCount = entry.second;
+            maxChar = entry.first;
+        }
+    }
+
+    return maxChar;
+}
+
+int main() {
+    string s;
+    cin >> s;
+
+    // Call the function and print the result
+    cout << maxFrequencyCharacter(s) << endl;
+
+    return 0;
+}
