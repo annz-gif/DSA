@@ -1,0 +1,53 @@
+#include <iostream>
+#include <deque>
+#include <unordered_map>
+#include <vector>
+
+using namespace std;
+
+int main() {
+    int N;
+    cin >> N;
+
+    vector<int> calling_order(N);
+    vector<int> ideal_order(N);
+
+    // Read calling order
+    for (int i = 0; i < N; ++i) {
+        cin >> calling_order[i];
+    }
+
+    // Read ideal order
+    for (int i = 0; i < N; ++i) {
+        cin >> ideal_order[i];
+    }
+
+    // Create a deque to simulate the calling order
+    deque<int> calling(calling_order.begin(), calling_order.end());
+    
+    int time_taken = 0;
+
+    // Step 2: Process each element in the ideal order
+    for (int i = 0; i < N; ++i) {
+        int process = ideal_order[i];
+        
+        // Find the index of the current process in the calling deque
+        int rotations = 0;
+        while (calling.front() != process) {
+            calling.push_back(calling.front()); // Move the front element to the back
+            calling.pop_front();  // This is equivalent to rotating the calling order
+            rotations++;
+        }
+        
+        // After finding the process, it's executed, which takes 1 unit of time
+        time_taken += rotations + 1;
+
+        // Now remove the process from the front of the deque
+        calling.pop_front();
+    }
+
+    // Output the total time taken
+    cout << time_taken << endl;
+
+    return 0;
+}
