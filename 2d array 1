@@ -1,0 +1,48 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+void wavePrint(vector<vector<int>>& matrix, int M, int N) {
+    vector<int> result;
+    
+    // Traverse through the matrix row by row
+    for (int i = 0; i < M; i++) {
+        if (i % 2 == 0) {
+            // For even-indexed rows, print left to right
+            for (int j = 0; j < N; j++) {
+                result.push_back(matrix[i][j]);
+            }
+        } else {
+            // For odd-indexed rows, print right to left
+            for (int j = N - 1; j >= 0; j--) {
+                result.push_back(matrix[i][j]);
+            }
+        }
+    }
+    
+    // Print the result array with commas and 'END' at the end
+    for (int i = 0; i < result.size(); i++) {
+        if (i != 0) cout << ", ";
+        cout << result[i];
+    }
+    cout << ", END" << endl;
+}
+
+int main() {
+    int M, N;
+    cin >> M >> N;  // Read number of rows (M) and columns (N)
+
+    vector<vector<int>> matrix(M, vector<int>(N));
+
+    // Reading the matrix values
+    for (int i = 0; i < M; i++) {
+        for (int j = 0; j < N; j++) {
+            cin >> matrix[i][j];
+        }
+    }
+
+    // Call the wavePrint function to print the wave pattern
+    wavePrint(matrix, M, N);
+    
+    return 0;
+}
