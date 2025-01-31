@@ -1,0 +1,35 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+    int n;
+    cin >> n;  // Read number of elements in the array
+    vector<int> nums(n);
+    
+    // Read the array
+    for (int i = 0; i < n; ++i) {
+        cin >> nums[i];
+    }
+    
+    int ones = 0, twos = 0;
+    
+    // Iterate over all the numbers
+    for (int num : nums) {
+        // Update twos with bits that are already in ones
+        twos |= ones & num;
+        
+        // Update ones with new bits
+        ones ^= num;
+        
+        // Mask out bits that appear 3 times (common bits in ones and twos)
+        int threes = ones & twos;
+        ones &= ~threes;
+        twos &= ~threes;
+    }
+    
+    // After processing, ones will contain the unique number
+    cout << ones << endl;
+    
+    return 0;
+}
