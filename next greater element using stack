@@ -1,0 +1,47 @@
+#include <iostream>
+#include <vector>
+#include <stack>
+using namespace std;
+
+void findNextGreaterElement(const vector<int>& arr, int n) {
+    // Initialize the result array with -1 (default value if no NGE is found)
+    vector<int> result(n, -1);
+    
+    // Stack to store indices of the elements for which NGE is not found yet
+    stack<int> st;
+    
+    // Traverse the array
+    for (int i = 0; i < n; ++i) {
+        // Find the next greater element for the elements in the stack
+        while (!st.empty() && arr[st.top()] < arr[i]) {
+            result[st.top()] = arr[i];  // Update the NGE for the element at the top of the stack
+            st.pop();  // Remove the element from the stack
+        }
+        
+        // Push the current index onto the stack
+        st.push(i);
+    }
+
+    // Print the result array
+    for (int i = 0; i < n; ++i) {
+        cout << result[i] << " ";
+    }
+    cout << endl;
+}
+
+int main() {
+    int n;
+    cin >> n;  // Read the size of the array
+    
+    vector<int> arr(n);
+    
+    // Read the array elements
+    for (int i = 0; i < n; ++i) {
+        cin >> arr[i];
+    }
+
+    // Call the function to find the next greater elements
+    findNextGreaterElement(arr, n);
+    
+    return 0;
+}
