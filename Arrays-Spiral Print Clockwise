@@ -1,0 +1,64 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+void spiralPrint(vector<vector<int>>& matrix, int M, int N) {
+    int top = 0, bottom = M - 1, left = 0, right = N - 1;
+    vector<int> result;
+
+    while (top <= bottom && left <= right) {
+        // Traverse from left to right across the top row
+        for (int i = left; i <= right; i++) {
+            result.push_back(matrix[top][i]);
+        }
+        top++;
+
+        // Traverse from top to bottom down the right column
+        for (int i = top; i <= bottom; i++) {
+            result.push_back(matrix[i][right]);
+        }
+        right--;
+
+        if (top <= bottom) {
+            // Traverse from right to left across the bottom row
+            for (int i = right; i >= left; i--) {
+                result.push_back(matrix[bottom][i]);
+            }
+            bottom--;
+        }
+
+        if (left <= right) {
+            // Traverse from bottom to top up the left column
+            for (int i = bottom; i >= top; i--) {
+                result.push_back(matrix[i][left]);
+            }
+            left++;
+        }
+    }
+
+    // Output the result array with commas and 'END' at the end
+    for (int i = 0; i < result.size(); i++) {
+        if (i != 0) cout << ", ";
+        cout << result[i];
+    }
+    cout << ", END" << endl;
+}
+
+int main() {
+    int M, N;
+    cin >> M >> N;  // Read number of rows (M) and columns (N)
+
+    vector<vector<int>> matrix(M, vector<int>(N));
+
+    // Reading the matrix values
+    for (int i = 0; i < M; i++) {
+        for (int j = 0; j < N; j++) {
+            cin >> matrix[i][j];
+        }
+    }
+
+    // Call the spiralPrint function to print the matrix in spiral order
+    spiralPrint(matrix, M, N);
+
+    return 0;
+}
