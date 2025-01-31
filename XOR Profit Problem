@@ -1,0 +1,21 @@
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+int main() {
+    int x, y;
+    cin >> x >> y;  // Read the input values
+
+    int maxXOR = 0;
+
+    // Iterate over all pairs (a, b) such that x <= a <= b <= y
+    for (int a = x; a <= y; ++a) {
+        for (int b = a; b <= y; ++b) {
+            maxXOR = max(maxXOR, a ^ b);  // Calculate XOR and update maxXOR
+        }
+    }
+
+    cout << maxXOR << endl;  // Output the maximum XOR value
+
+    return 0;
+}
