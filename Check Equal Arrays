@@ -1,0 +1,61 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+
+// } Driver Code Ends
+
+#include<vector>
+#include<algorithm>
+using namespace std;
+class Solution {
+  public:
+    // Function to check if two arrays are equal or not.
+    bool checkEqual(vector<int>& a, vector<int>& b) {
+        if(a.size()!=b.size()){
+            return false;
+        }
+         vector<int> sortedA = a;
+    vector<int> sortedB = b;
+
+    sort(sortedA.begin(), sortedA.end());
+    sort(sortedB.begin(), sortedB.end());
+
+    // Compare the sorted arrays element by element
+    for (size_t i = 0; i < a.size(); ++i) {
+        if (sortedA[i] != sortedB[i]) {
+            return false;  // If any element is different, arrays are not equal
+        }
+    }
+
+    return true;  // All elements are the same, arrays are equal
+}
+    };
+
+//{ Driver Code Starts.
+
+int main() {
+    int t;
+    cin >> t;
+    cin.ignore(); // Ignore the newline character after t
+    while (t--) {
+        vector<int> arr1, arr2;
+        string input1, input2;
+
+        getline(cin, input1); // Read the entire line for the first array elements
+        stringstream ss1(input1);
+        int number;
+        while (ss1 >> number) {
+            arr1.push_back(number);
+        }
+
+        getline(cin, input2); // Read the entire line for the second array elements
+        stringstream ss2(input2);
+        while (ss2 >> number) {
+            arr2.push_back(number);
+        }
+
+        Solution ob;
+        cout << (ob.checkEqual(arr1, arr2) ? "true" : "false") << "\n~\n";
+    }
+    return 0;
+}
