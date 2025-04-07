@@ -25,7 +25,7 @@ void wavePrint(vector<vector<int>>& matrix, int M, int N) {
         if (i != 0) cout << ", ";
         cout << result[i];
     }
-    cout << ", END" << endl;
+    cout << " END" << endl;
 }
 
 int main() {
