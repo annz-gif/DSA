@@ -8,7 +8,7 @@ public:
         for (int i = 0; i < n; i++) {
             if (j < m && i == spaces[j]) {
                 t[i+j] = ' '; 
-                j++;      // Move to the next space index
+                j++;      // Move to the next space 
             }
             t[i+j]=s[i]; // Add the character from the original string
         }
