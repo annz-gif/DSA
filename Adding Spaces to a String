@@ -10,7 +10,7 @@ public:
                 t[i+j] = ' '; 
                 j++;      // Move to the next space 
             }
-            t[i+j]=s[i]; // Add the character from the original string
+            t[i+j]=s[i]; // Add the characters from the original string
         }
         return t;
     }
