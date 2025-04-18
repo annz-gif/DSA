@@ -3,7 +3,7 @@
 using namespace std;
 
 int maxTeamFormation(int N, int M) {
-    // If there are less than 4 total players, no team can be formed.
+    // If there are less than 4 total players, no team can be formed
     if (N + M < 4) {
         return 0;
     }
